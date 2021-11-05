@@ -6,6 +6,13 @@ using UnityEngine.Events;
 [Serializable] public class BallonClickedEvent : UnityEvent<Balloon> { }
 [Serializable] public class BallonTouchBorderEvent : UnityEvent<Balloon> { }
 
+[Serializable] public class AddScoreEvent : UnityEvent<int> { }
+[Serializable] public class AddDamageEvent : UnityEvent<int> { }
+
+[Serializable] public class ChangeHealthEvent : UnityEvent<int> { }
+[Serializable] public class ChangeScoreEvent : UnityEvent<int> { }
+[Serializable] public class ChangeBestScoreEvent : UnityEvent<int> { }
+
 public interface IObjectAsParameter { }
 
 public struct BalloonSettings : IObjectAsParameter
@@ -14,6 +21,7 @@ public struct BalloonSettings : IObjectAsParameter
     public Vector3 Scale { get; set; }
     public Color Color { get; set; }
     public float Speed { get; set; }
+    public float Acceleration { get; set; }
     public int PrizePoints { get; set; }
     public int PlayerDamagePoints { get; set; }
 }

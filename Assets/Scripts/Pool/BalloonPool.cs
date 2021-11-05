@@ -36,7 +36,7 @@ public class BalloonPool
         _pool.Enqueue(balloon);
     }
 
-    public void FillWithNewElements(int count)
+    private void FillWithNewElements(int count)
     {
         for (int i = 0; i < count; i++)
         {

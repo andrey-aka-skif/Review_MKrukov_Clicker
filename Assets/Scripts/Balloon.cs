@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
 {
     private float _speed;
+    private float _acceleration;
 
     private BalloonBehaviour _behaviour;
 
@@ -14,7 +15,7 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
     public BallonTouchBorderEvent BorderTouched { get; private set; }
 
     public int PrizePoints { get; private set; }
-    public int PlayerDamagePoints { get; private set; }
+    public int DamageToPlayer { get; private set; }
 
     private void OnEnable()
     {
@@ -32,6 +33,7 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
     {
         if (IsAlive)
         {
+            _speed += _acceleration;
             transform.position -= new Vector3(0, _speed * Time.deltaTime);
         }
     }
@@ -50,8 +52,11 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
 
     private void OnTriggerEnter(Collider other)
     {
-        IsAlive = false;
-        BorderTouched?.Invoke(this);
+        if (other.TryGetComponent(out ILimit _))
+        {
+            IsAlive = false;
+            BorderTouched?.Invoke(this);
+        }
     }
 
     public void SetState(IObjectAsParameter parameter)
@@ -68,9 +73,10 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
         _behaviour.SetColor(settings.Color);
 
         _speed = settings.Speed;
+        _acceleration = settings.Acceleration;
 
         PrizePoints = settings.PrizePoints;
-        PlayerDamagePoints = settings.PlayerDamagePoints;
+        DamageToPlayer = settings.PlayerDamagePoints;
     }
 
     public void ResetState()
