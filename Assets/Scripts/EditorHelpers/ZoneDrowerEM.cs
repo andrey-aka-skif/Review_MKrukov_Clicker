@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -25,7 +26,7 @@ public class ZoneDrowerEM : MonoBehaviour
         IZoned zoner = GetComponent<IZoned>();
         if (zoner == null)
         {
-            throw new System.NullReferenceException("Отсутствует компонент, реализующий IZoned");
+            throw new NullReferenceException("Отсутствует компонент, реализующий IZoned");
         }
         return zoner;
     }

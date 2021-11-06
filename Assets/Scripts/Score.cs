@@ -8,23 +8,30 @@ public class Score : MonoBehaviour
     [SerializeField] private ChangeScoreEvent ChangeScore;
     [SerializeField] private ChangeBestScoreEvent ChangeBestScore;
 
-    private ScoreStorage _storage;
+    private string _bestScoreKey = "BestScore";
 
     private int _score;
+    private int _startHealth;
     private int _health;
 
-    public int MaxScore => _storage.BestScore;
-
-    public void Init(ScoreStorage storage)
+    public int BestScore
     {
-        _storage = storage;
+        get => PlayerPrefs.GetInt(_bestScoreKey);
+        private set => PlayerPrefs.SetInt(_bestScoreKey, value);
+    }
+
+    public void Init(int startHealth, string bestScoreKey)
+    {
+        _startHealth = startHealth;
+        _health = startHealth;
+        _bestScoreKey = bestScoreKey;
         Restart();
     }
 
     public void Restart()
     {
         _score = 0;
-        _health = _storage.DefaultHealth;
+        _health = _startHealth;
 
         Dead ??= new UnityEvent();
         ChangeHealth ??= new ChangeHealthEvent();
@@ -32,17 +39,17 @@ public class Score : MonoBehaviour
 
         ChangeHealth?.Invoke(_health);
         ChangeScore?.Invoke(_score);
-        ChangeBestScore?.Invoke(_storage.BestScore);
+        ChangeBestScore?.Invoke(BestScore);
     }
 
     public void OnScoreAdd(int score)
     {
         _score += score;
 
-        if(_score > MaxScore)
+        if (_score > BestScore)
         {
-            _storage.BestScore = _score;
-            ChangeBestScore?.Invoke(_storage.BestScore);
+            BestScore = _score;
+            ChangeBestScore?.Invoke(BestScore);
         }
 
         ChangeScore?.Invoke(_score);
@@ -50,11 +57,19 @@ public class Score : MonoBehaviour
 
     public void OnDamageAdd(int damage)
     {
-        _health -= damage;
-
         if(_health <= 0)
         {
+            return;
+        }
+
+        _health -= damage;
+
+        if (_health <= 0)
+        {
+            _health = 0;
+            ChangeHealth?.Invoke(_health);
             Dead?.Invoke();
+            return;
         }
 
         ChangeHealth?.Invoke(_health);

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpawnRandomizer))]
 public class Spawner : MonoBehaviour
 {
     private float _minTimeOut = 1;
@@ -40,12 +39,13 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    [SerializeField] private AddScoreEvent _ScoreAdded;
-    [SerializeField] private AddDamageEvent _DamageAdded;
+    [SerializeField] private AddScoreEvent ScoreAdded;
+    [SerializeField] private AddDamageEvent DamageAdded;
 
-    public void Init(BalloonPool pool, float minTimeOut = 1, float maxTimeOut = 5, float acceleration = .01f)
+    public void Init(BalloonPool pool, SpawnRandomizer randomizer, float minTimeOut = 1, float maxTimeOut = 5, float acceleration = .01f)
     {
         _pool = pool;
+        _randomizer = randomizer;
 
         _minTimeOut = minTimeOut;
         _maxTimeOut = maxTimeOut;
@@ -59,19 +59,13 @@ public class Spawner : MonoBehaviour
             throw new ArgumentNullException("Не найден компонент, реализующий ISpawnZone");
         }
 
-        _randomizer = transform.GetComponent<SpawnRandomizer>();
-        if (_randomizer == null)
-        {
-            throw new ArgumentNullException("Не найден компонент SpawnRandomizer");
-        }
-
         Restart();
     }
 
     public void Restart()
     {
-        _ScoreAdded ??= new AddScoreEvent();
-        _DamageAdded ??= new AddDamageEvent();
+        ScoreAdded ??= new AddScoreEvent();
+        DamageAdded ??= new AddDamageEvent();
 
         ReturnAllInPool();
     }
@@ -96,12 +90,12 @@ public class Spawner : MonoBehaviour
 
     public void OnBalloonClicked(Balloon balloon)
     {
-        _ScoreAdded?.Invoke(balloon.PrizePoints);
+        ScoreAdded?.Invoke(balloon.Prize);
     }
 
     public void OnBalloonTouchedBorder(Balloon balloon)
     {
-        _DamageAdded?.Invoke(balloon.DamageToPlayer);
+        DamageAdded?.Invoke(balloon.Damage);
     }
 
     private void ReturnAllInPool()
@@ -115,12 +109,10 @@ public class Spawner : MonoBehaviour
     private void CreateBalloon()
     {
         Balloon balloon = _pool.GetElement();
-        balloon.SetState(GetSettings());
+        balloon.Activate(GetSettings());
         balloon.Clicked.AddListener(OnBalloonClicked);
         balloon.BorderTouched.AddListener(OnBalloonTouchedBorder);
-
-        BalloonBehaviour behaviour = balloon.GetComponent<BalloonBehaviour>();
-        behaviour.Destroyed.AddListener(OnBalloonDestroyed);
+        balloon.Destroyed.AddListener (OnBalloonDestroyed);
 
         _spawned.Add(balloon);
     }
@@ -134,8 +126,8 @@ public class Spawner : MonoBehaviour
             Color = _randomizer.Color,
             Speed = _randomizer.Speed,
             Acceleration = _acceleration,
-            PrizePoints = _randomizer.PrizePoints,
-            PlayerDamagePoints = _randomizer.PlayerDamagePoints
+            PrizePoints = _randomizer.Prize,
+            PlayerDamagePoints = _randomizer.Damage
         };
     }
 }

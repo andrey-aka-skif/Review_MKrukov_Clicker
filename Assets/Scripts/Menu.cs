@@ -16,13 +16,6 @@ public class Menu : MonoBehaviour
     [SerializeField] private Text _deadMenuScore;
     [SerializeField] private Text _deadMenuBestScore;
 
-    private PMsDI _compositionRoot;
-
-    public void Init(PMsDI compositionRoot)
-    {
-        _compositionRoot = compositionRoot;
-    }
-
     public void Pause()
     {
         HideTopMenu();

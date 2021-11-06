@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 79835050}
   - component: {fileID: 79835049}
-  - component: {fileID: 79835052}
   - component: {fileID: 79835048}
   - component: {fileID: 79835051}
   m_Layer: 0
@@ -171,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc809ff93f11f0499cbbbf0a8e34c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ScoreAdded:
+  ScoreAdded:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1850633386}
@@ -186,7 +185,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _DamageAdded:
+  DamageAdded:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1850633386}
@@ -228,22 +227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 0.160779, g: 0, b: 1, a: 1}
---- !u!114 &79835052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79835047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7de57b32e25294aa21deb84fcc1ecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxPrizePoints: 10
-  _maxPlayerDamagePoints: 10
-  _minSpeedValue: 0.1
-  _maxSpeedValue: 1
 --- !u!1 &99904919
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +463,7 @@ GameObject:
   - component: {fileID: 351272977}
   - component: {fileID: 351272979}
   m_Layer: 0
-  m_Name: PMsDI
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -498,13 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdeb90b100466748a8783c99f06f165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2871242259304217074, guid: a165cd93b954ed74e903b4422b3fce99, type: 3}
+  _appSettings: {fileID: 11400000, guid: 230620b1659177543ae308338e9eda00, type: 2}
   _spawnRoot: {fileID: 79835050}
-  _minTimeOut: 1
-  _maxTimeOut: 5
-  _acceleration: 0.01
-  _poolCapacity: 10
-  _storage: {fileID: 11400000, guid: ab61f722254a24c4b9c35ada8f835301, type: 2}
 --- !u!4 &351272978
 Transform:
   m_ObjectHideFlags: 0

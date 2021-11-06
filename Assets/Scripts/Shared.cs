@@ -2,9 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable] public class BallonDestroyedEvent : UnityEvent<Balloon> { }
-[Serializable] public class BallonClickedEvent : UnityEvent<Balloon> { }
-[Serializable] public class BallonTouchBorderEvent : UnityEvent<Balloon> { }
+[Serializable] public class BalloonDestroyedEvent : UnityEvent<Balloon> { }
+[Serializable] public class BalloonClickedEvent : UnityEvent<Balloon> { }
+[Serializable] public class BalloonTouchBorderEvent : UnityEvent<Balloon> { }
+
+[Serializable] public class BalloonBurstedEvent : UnityEvent<Balloon> { }
+[Serializable] public class BalloonExplodedEvent : UnityEvent<Balloon> { }
 
 [Serializable] public class AddScoreEvent : UnityEvent<int> { }
 [Serializable] public class AddDamageEvent : UnityEvent<int> { }
@@ -13,9 +16,8 @@ using UnityEngine.Events;
 [Serializable] public class ChangeScoreEvent : UnityEvent<int> { }
 [Serializable] public class ChangeBestScoreEvent : UnityEvent<int> { }
 
-public interface IObjectAsParameter { }
 
-public struct BalloonSettings : IObjectAsParameter
+public struct BalloonSettings
 {
     public Vector3 Position { get; set; }
     public Vector3 Scale { get; set; }
@@ -28,13 +30,13 @@ public struct BalloonSettings : IObjectAsParameter
 
 public interface IPoolable
 {
-    void SetState(IObjectAsParameter parameter);
-    void ResetState();
+    void Activate(BalloonSettings settings);
+    void Deactivate();
 }
 
-public interface IPoolObjectCreator<T>
+public interface IBalloonCreator
 {
-    T Create();
+    Balloon Create();
 }
 
 public interface IZoned

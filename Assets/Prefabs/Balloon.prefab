@@ -127,6 +127,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621698350698db84d9856573e7e84b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Clicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6030669717605175825}
+        m_TargetAssemblyTypeName: BalloonBurster, Assembly-CSharp
+        m_MethodName: OnReadyToDestroy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  BorderTouched:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6030669717605175825}
+        m_TargetAssemblyTypeName: BalloonBurster, Assembly-CSharp
+        m_MethodName: OnReadyToDestroy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Destroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6030669717605175825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +174,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boomScaleMultiplier: 2
   _boomGrowSpeed: 10
-  _particles: {fileID: 6364935507432629677}
+  Bursted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6364935507432629677}
+        m_TargetAssemblyTypeName: ParticleFuse, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4587952785500089526
 GameObject:
   m_ObjectHideFlags: 0
@@ -9881,7 +9928,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2920e96b675e449b816eaf901e1d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 7157204976805710401}
+  _smoke: {fileID: 7157204976805710401}
+  Exploded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2871242259304217074}
+        m_TargetAssemblyTypeName: Balloon, Assembly-CSharp
+        m_MethodName: OnReadyToDestroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9048880495850484399
 GameObject:
   m_ObjectHideFlags: 0

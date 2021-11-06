@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BalloonCreator : IPoolObjectCreator<Balloon>
+public class BalloonCreator : IBalloonCreator
 {
-    [SerializeField] private Balloon _prefab;
-    [SerializeField] private Transform _root;
+    private readonly Balloon _prefab;
+    private readonly Transform _root;
 
     public BalloonCreator(Balloon prefab, Transform root)
     {
@@ -14,7 +14,6 @@ public class BalloonCreator : IPoolObjectCreator<Balloon>
     public Balloon Create()
     {
         Balloon balloon = Object.Instantiate(_prefab, _root);
-        balloon.Init();
         return balloon;
     }
 }

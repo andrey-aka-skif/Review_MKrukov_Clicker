@@ -3,7 +3,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 
 [ExecuteInEditMode]
-public class PMsDIEM : MonoBehaviour
+public class HelpersInitializer : MonoBehaviour
 {
     private ScreenInformer _screenInformer;
 
