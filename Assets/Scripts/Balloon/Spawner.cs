@@ -74,6 +74,10 @@ public class Spawner : MonoBehaviour
             _spawned.Remove(balloon);
         }
 
+        balloon.Clicked.RemoveListener(OnBalloonClicked);
+        balloon.BorderTouched.RemoveListener(OnBalloonTouchedBorder);
+        balloon.Destroyed.RemoveListener(OnBalloonDestroyed);
+
         _pool.ReturnElement(balloon);
     }
 
