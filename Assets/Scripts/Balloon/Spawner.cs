@@ -4,54 +4,35 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private float _minTimeOut = 1;
-    private float _maxTimeOut = 5;
-    private float _acceleration = .01f;
+    private float _minTimeoutDefault;
+    private float _maxTimeoutDefault;
+
+    private float _creationTimeDecrease;
+    private float _acceleration;
 
     private RandomTimer _timer;
 
-    private SpawnRandomizer _randomizer;
+    private IRandomizer _randomizer;
 
     private ISpawnZone _spawnZone;
     private BalloonPool _pool;
 
     private readonly List<Balloon> _spawned = new List<Balloon>();
 
-    public float MinTimeOut
-    {
-        get => _minTimeOut;
-        set
-        {
-            _minTimeOut = value > 0 ? value : 0;
-            _minTimeOut = value < _maxTimeOut ? value : _maxTimeOut;
-            _timer = new RandomTimer(_minTimeOut, _maxTimeOut);
-        }
-    }
-
-    public float MaxTimeOut
-    {
-        get => _maxTimeOut;
-        set
-        {
-            _maxTimeOut = value > 0 ? value : 0;
-            _maxTimeOut = value > _minTimeOut ? value : _minTimeOut;
-            _timer = new RandomTimer(_minTimeOut, _maxTimeOut);
-        }
-    }
-
     [SerializeField] private AddScoreEvent ScoreAdded;
     [SerializeField] private AddDamageEvent DamageAdded;
 
-    public void Init(BalloonPool pool, SpawnRandomizer randomizer, float minTimeOut = 1, float maxTimeOut = 5, float acceleration = .01f)
+    public void Init(BalloonPool pool, RandomTimer timer, IRandomizer randomizer, SpawnerParams param)
     {
         _pool = pool;
+        _timer = timer;
         _randomizer = randomizer;
 
-        _minTimeOut = minTimeOut;
-        _maxTimeOut = maxTimeOut;
-        _acceleration = acceleration;
+        _creationTimeDecrease = param.CreationTimeDecrease;
+        _acceleration = param.Acceleration;
 
-        _timer = new RandomTimer(_minTimeOut, _maxTimeOut);
+        _minTimeoutDefault = _timer.MinTimeout;
+        _maxTimeoutDefault = _timer.MaxTimeOut;
 
         _spawnZone = transform.GetComponent<ISpawnZone>();
         if (_spawnZone == null)
@@ -67,6 +48,11 @@ public class Spawner : MonoBehaviour
         ScoreAdded ??= new AddScoreEvent();
         DamageAdded ??= new AddDamageEvent();
 
+        _randomizer.Reset();
+
+        _timer.MinTimeout = _minTimeoutDefault;
+        _timer.MaxTimeOut = _maxTimeoutDefault;
+
         ReturnAllInPool();
     }
 
@@ -75,12 +61,15 @@ public class Spawner : MonoBehaviour
         if (_timer.Dropped)
         {
             CreateBalloon();
-        }        
+
+            _timer.MinTimeout -= _creationTimeDecrease;
+            _timer.MaxTimeOut -= _creationTimeDecrease;
+        }
     }
 
     public void OnBalloonDestroyed(Balloon balloon)
     {
-        if(_spawned.Contains(balloon))
+        if (_spawned.Contains(balloon))
         {
             _spawned.Remove(balloon);
         }
@@ -112,7 +101,7 @@ public class Spawner : MonoBehaviour
         balloon.Activate(GetSettings());
         balloon.Clicked.AddListener(OnBalloonClicked);
         balloon.BorderTouched.AddListener(OnBalloonTouchedBorder);
-        balloon.Destroyed.AddListener (OnBalloonDestroyed);
+        balloon.Destroyed.AddListener(OnBalloonDestroyed);
 
         _spawned.Add(balloon);
     }

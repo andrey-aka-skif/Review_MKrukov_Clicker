@@ -5,6 +5,8 @@ public class BalloonPool
     private readonly IBalloonCreator _creator;
     private readonly Queue<Balloon> _pool;
 
+    private int _counter;
+
     public BalloonPool(IBalloonCreator creator, int capacity = 10)
     {
         _creator = creator;
@@ -31,7 +33,7 @@ public class BalloonPool
 
     private Balloon CreateNewElement()
     {
-        Balloon balloon = _creator.Create();
+        Balloon balloon = _creator.Create(_counter++);
         balloon.Deactivate();
         return balloon;
     }

@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: AppSettings
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2871242259304217074, guid: a165cd93b954ed74e903b4422b3fce99, type: 3}
-  _minCreationTime: 0.5
-  _maxCreationTime: 3
+  _minCreationTime: 1
+  _maxCreationTime: 2
+  _creationTimeDecrease: 0.01
   _poolCapacity: 10
   _maxPrize: 10
   _maxDamage: 10
-  _minSpeed: 0.1
-  _maxSpeed: 1
-  _acceleration: 0.025
-  _startHealth: 25
+  _minSpeed: 0.01
+  _maxSpeed: 0.05
+  _speedIncrease: 0.01
+  _acceleration: 0.005
+  _startHealth: 100
   _bestScoreKey: BestScore

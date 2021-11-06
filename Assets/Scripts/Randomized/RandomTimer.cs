@@ -3,16 +3,37 @@ using Random = System.Random;
 
 public sealed class RandomTimer
 {
+    private const float MIN_TIMEOUT = 0.1f;
+
     private const float MIN_TIMEOUT_DEFAULT = 0.5f;
     private const float MAX_TIMEOUT_DEFAULT = 2.5f;
 
     private readonly Random _rnd = new Random();
 
-    private readonly float _minTimeout;
-    private readonly float _maxTimeout;
-    
+    private float _minTimeout;
+    private float _maxTimeout;
+
     private float _timeout;
     private float _lastUpdate;
+
+    public float MinTimeout
+    {
+        get => _minTimeout;
+        set
+        {
+            _minTimeout = value > MIN_TIMEOUT ? value : MIN_TIMEOUT;
+            _minTimeout = _minTimeout < _maxTimeout ? _minTimeout : _maxTimeout;
+        }
+    }
+
+    public float MaxTimeOut
+    {
+        get => _maxTimeout;
+        set
+        {
+            _maxTimeout = value > _minTimeout ? value : _minTimeout;
+        }
+    }
 
     public RandomTimer(float minTimeout = MIN_TIMEOUT_DEFAULT, float maxTimeout = MAX_TIMEOUT_DEFAULT)
     {

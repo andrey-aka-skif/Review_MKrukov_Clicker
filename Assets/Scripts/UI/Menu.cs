@@ -16,36 +16,25 @@ public class Menu : MonoBehaviour
     [SerializeField] private Text _deadMenuScore;
     [SerializeField] private Text _deadMenuBestScore;
 
-    public void Pause()
+    public void OnPause()
     {
         HideTopMenu();
         ShowPauseMenu();
         HideDeadMenu();
-
-        Time.timeScale = 0;
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void Restart()
+    public void OnRestart()
     {
         ShowTopMenu();
         HidePauseMenu();
         HideDeadMenu();
-
-        Time.timeScale = 1;
     }
 
-    public void Resume()
+    public void OnResume()
     {
         ShowTopMenu();
         HidePauseMenu();
         HideDeadMenu();
-
-        Time.timeScale = 1;
     }
 
     public void OnChangeHealth(int health)
@@ -71,8 +60,6 @@ public class Menu : MonoBehaviour
         HideTopMenu();
         HidePauseMenu();
         ShowDeadMenu();
-
-        Time.timeScale = 0;
     }
 
     private void ShowTopMenu() => _topMenu.gameObject.SetActive(true);

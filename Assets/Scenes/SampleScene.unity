@@ -461,6 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 351272978}
   - component: {fileID: 351272977}
+  - component: {fileID: 351272980}
   - component: {fileID: 351272979}
   m_Layer: 0
   m_Name: Root
@@ -507,6 +508,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7279b54ac08ba164dabb68aa64fa3ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &351272980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351272976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d3c62bccf674c4bb4c2032add111cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &413796405
@@ -1239,8 +1252,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 901989730}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -1522,6 +1535,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 901989730}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -2082,8 +2107,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 901989730}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -2637,6 +2662,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
+        m_MethodName: OnDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ChangeHealth:
     m_PersistentCalls:
       m_Calls:
@@ -2767,6 +2804,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 901989730}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -2845,7 +2894,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.3570614, y: 1, z: 2}
+  m_Size: {x: 8.958743, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1911444144
 MonoBehaviour:
@@ -2974,6 +3023,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 901989730}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
@@ -3131,6 +3192,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 901989730}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 351272980}
+        m_TargetAssemblyTypeName: LifiCircle, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:

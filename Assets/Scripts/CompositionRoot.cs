@@ -25,18 +25,27 @@ public class CompositionRoot : MonoBehaviour
         BalloonPool pool = new BalloonPool(creator, 
                                             _appSettings.PoolCapacity);
 
-        SpawnRandomizer randomizer = new SpawnRandomizer(   
+        RandomTimer timer = new RandomTimer(_appSettings.MinCreationTime, _appSettings.MaxCreationTime);
+
+        Randomizer randomizer = new Randomizer(   
                                                     _appSettings.MaxPrize, 
                                                     _appSettings.MaxDamage, 
                                                     _appSettings.MinSpeed, 
                                                     _appSettings.MaxSpeed);
 
+        RandomizerWithSpeedIncrease randomizerWithSpeedIncrease = new RandomizerWithSpeedIncrease(randomizer);
+        randomizerWithSpeedIncrease.Increase = _appSettings.SpeedIncrease;
+
         Spawner spawner = FindObjectOfType<Spawner>();
-        spawner.Init(pool, 
-                    randomizer, 
-                    _appSettings.MinCreationTime, 
-                    _appSettings.MaxCreationTime, 
-                    _appSettings.Acceleration);
+        spawner.Init(pool,
+                    timer,
+                    randomizerWithSpeedIncrease, 
+                    new SpawnerParams { 
+                        MinTimeOut = _appSettings.MinCreationTime,
+                        MaxTimeOut = _appSettings.MaxCreationTime,
+                        CreationTimeDecrease = _appSettings.CreationTimeDecrease,
+                        Acceleration = _appSettings.Acceleration}
+                    );
 
         DownScreenLimiter limiter = FindObjectOfType<DownScreenLimiter>();
         limiter.Init(screenInformer);
