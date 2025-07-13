@@ -1,25 +1,32 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечает за эффект взрыва шара
+/// </summary>
 public class BalloonBurster : MonoBehaviour
 {
-    [SerializeField] private float _boomScaleMultiplier = 2;
-    [SerializeField] private float _boomGrowSpeed = 2;
+    [SerializeField] 
+    private float _boomScaleMultiplier = 2;
+
+    [SerializeField] 
+    private float _boomGrowSpeed = 2;
 
     private Balloon _balloon;
 
+    /// <summary>
+    /// Эффект взрыва завершен
+    /// </summary>
     public BalloonBurstedEvent Bursted;
 
-    private void OnEnable()
-    {
-        Bursted ??= new BalloonBurstedEvent();
-    }
+    private void OnEnable() => Bursted ??= new BalloonBurstedEvent();
 
-    private void OnDisable()
-    {
-        Bursted.RemoveAllListeners();
-    }
+    private void OnDisable() => Bursted.RemoveAllListeners();
 
+    /// <summary>
+    /// Запустить анимацию взрыва
+    /// </summary>
+    /// <param name="balloon">Шар, который должен быть уничтожен после взрыва</param>
     public void OnReadyToDestroy(Balloon balloon)
     {
         _balloon = balloon;
@@ -28,7 +35,7 @@ public class BalloonBurster : MonoBehaviour
 
     private IEnumerator Burst()
     {
-        float targetScale = transform.localScale.x * _boomScaleMultiplier;
+        var targetScale = transform.localScale.x * _boomScaleMultiplier;
 
         while (transform.localScale.x <= targetScale)
         {

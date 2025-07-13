@@ -1,30 +1,59 @@
 using UnityEngine;
 
+/// <summary>
+/// Объект с настройками приложения
+/// </summary>
 [CreateAssetMenu(fileName = "AppSettings", menuName = "AppSettings", order = 1)]
 public class AppSettings : ScriptableObject
 {
-    [SerializeField] private Balloon _prefab;
+    [SerializeField]
+    private Balloon _prefab;
 
-    [SerializeField] private float _minCreationTime = 1;
-    [SerializeField] private float _maxCreationTime = 5;
 
-    [SerializeField] private float _creationTimeDecrease = .01f;
+    [SerializeField]
+    private float _minCreationTime = 1;
 
-    [SerializeField] private int _poolCapacity = 10;
+    [SerializeField]
+    private float _maxCreationTime = 5;
 
-    [SerializeField, Range(1, 10)] private int _maxPrize = 10;
-    [SerializeField, Range(1, 10)] private int _maxDamage = 10;
 
-    [SerializeField] private float _minSpeed = 0.1f;
-    [SerializeField] private float _maxSpeed = 1;
+    [SerializeField]
+    private float _creationTimeDecrease = .01f;
 
-    [SerializeField] private float _speedIncrease = .1f;
 
-    [SerializeField] private float _acceleration = .01f;
+    [SerializeField]
+    private int _poolCapacity = 10;
 
-    [SerializeField] private int _startHealth = 10;
 
-    [SerializeField] private string _bestScoreKey = "BestScore";
+    [SerializeField, Range(1, 10)]
+    private int _maxPrize = 10;
+
+    [SerializeField, Range(1, 10)]
+    private int _maxDamage = 10;
+
+
+    [SerializeField]
+    private float _minSpeed = 0.1f;
+
+    [SerializeField]
+    private float _maxSpeed = 1;
+
+
+    [SerializeField]
+    private float _speedIncrease = .1f;
+
+
+    [SerializeField]
+    private float _acceleration = .01f;
+
+
+    [SerializeField]
+    private int _startHealth = 10;
+
+
+    [SerializeField]
+    private string _bestScoreKey = "BestScore";
+
 
     public Balloon Prefab => _prefab;
     public float MinCreationTime => _minCreationTime;

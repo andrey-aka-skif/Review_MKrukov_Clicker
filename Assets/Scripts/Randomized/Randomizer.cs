@@ -1,6 +1,9 @@
 using UnityEngine;
 using Random = System.Random;
 
+/// <summary>
+/// Рандомайзер для получения случайных характеристик шара
+/// </summary>
 public class Randomizer : IRandomizer
 {
     private readonly int _maxPrize;
@@ -9,7 +12,7 @@ public class Randomizer : IRandomizer
     private readonly float _minSpeed;
     private readonly float _maxSpeed;
 
-    private readonly Random _rnd = new Random();
+    private readonly Random _rnd = new();
 
     public Randomizer(int maxPrize, int maxDamage, float minSpeed, float maxSpeed)
     {
@@ -19,7 +22,7 @@ public class Randomizer : IRandomizer
         _maxSpeed = maxSpeed;
     }
 
-    public virtual Color Color => new Color(
+    public virtual Color Color => new(
         (float)_rnd.NextDouble(),
         (float)_rnd.NextDouble(),
         (float)_rnd.NextDouble());

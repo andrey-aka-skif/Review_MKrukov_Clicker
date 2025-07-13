@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Помощник, предоставляющий информацию о размере экрана
+/// </summary>
 public class ScreenInformer : MonoBehaviour
 {
     private float _leftLimit;
@@ -10,25 +13,47 @@ public class ScreenInformer : MonoBehaviour
     private float _screenWidth;
     private float _screenHeight;
 
+    /// <summary>
+    /// Ограничение экрана слева
+    /// </summary>
     public float SceneLeftLimit => _leftLimit;
+
+    /// <summary>
+    /// Ограничение экрана справа
+    /// </summary>
     public float SceneRightLimit => _rightLimit;
+
+    /// <summary>
+    /// Ограничение экрана сверху
+    /// </summary>
     public float SceneTopLimit => _topLimit;
+
+    /// <summary>
+    /// Ограничение экрана снизу
+    /// </summary>
     public float SceneBottomLimit => _bottomLimit;
 
+    /// <summary>
+    /// Ширина экрана
+    /// </summary>
     public float SceneWidth => _screenWidth;
+
+    /// <summary>
+    /// Высота экрана
+    /// </summary>
     public float SceneHeight => _screenHeight;
 
-    public void Init()
-    {
-        GetInfo();
-    }
+    /// <summary>
+    /// Инициализировать информер
+    /// </summary>
+    public void Init() => GetInfo();
 
     private void GetInfo()
     {
-        float cameraZ = Mathf.Abs(Camera.main.transform.position.z);
+        var cameraZ = Mathf.Abs(Camera.main.transform.position.z);
 
-        Vector3 leftBottomFramePoint = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));
-        Vector3 rightTopFramePoint = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, cameraZ));
+        var leftBottomFramePoint = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));
+        var rightTopFramePoint = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, cameraZ));
 
         _leftLimit = leftBottomFramePoint.x;
         _rightLimit = rightTopFramePoint.x;

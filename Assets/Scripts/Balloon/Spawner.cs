@@ -2,8 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Спаунер шаров
+/// </summary>
 public class Spawner : MonoBehaviour
 {
+    [SerializeField]
+    private AddScoreEvent ScoreAdded;
+
+    [SerializeField]
+    private AddDamageEvent DamageAdded;
+
     private float _minTimeoutDefault;
     private float _maxTimeoutDefault;
 
@@ -17,12 +26,21 @@ public class Spawner : MonoBehaviour
     private ISpawnZone _spawnZone;
     private BalloonPool _pool;
 
-    private readonly List<Balloon> _spawned = new List<Balloon>();
+    private readonly List<Balloon> _spawned = new();
 
-    [SerializeField] private AddScoreEvent ScoreAdded;
-    [SerializeField] private AddDamageEvent DamageAdded;
-
-    public void Init(BalloonPool pool, RandomTimer timer, IRandomizer randomizer, SpawnerParams param)
+    /// <summary>
+    /// Инициализировать спаунер
+    /// </summary>
+    /// <param name="pool">Пул шаров</param>
+    /// <param name="timer">Таймер спауна</param>
+    /// <param name="randomizer">Рандомизатор свойств шаров</param>
+    /// <param name="param">Объект, содержащий прочие настройки спаунера</param>
+    /// <exception cref="ArgumentNullException">Не найден объект, представляющий зону спауна</exception>
+    public void Init(
+        BalloonPool pool,
+        RandomTimer timer,
+        IRandomizer randomizer,
+        SpawnerParams param)
     {
         _pool = pool;
         _timer = timer;
@@ -37,12 +55,15 @@ public class Spawner : MonoBehaviour
         _spawnZone = transform.GetComponent<ISpawnZone>();
         if (_spawnZone == null)
         {
-            throw new ArgumentNullException("�� ������ ���������, ����������� ISpawnZone");
+            throw new ArgumentNullException("Не найден компонент, реализующий ISpawnZone");
         }
 
         Restart();
     }
 
+    /// <summary>
+    /// Рестарт спаунера
+    /// </summary>
     public void Restart()
     {
         ScoreAdded ??= new AddScoreEvent();
@@ -67,7 +88,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void OnBalloonDestroyed(Balloon balloon)
+    private void OnBalloonDestroyed(Balloon balloon)
     {
         if (_spawned.Contains(balloon))
         {
@@ -81,15 +102,9 @@ public class Spawner : MonoBehaviour
         _pool.ReturnElement(balloon);
     }
 
-    public void OnBalloonClicked(Balloon balloon)
-    {
-        ScoreAdded?.Invoke(balloon.Prize);
-    }
+    private void OnBalloonClicked(Balloon balloon) => ScoreAdded?.Invoke(balloon.Prize);
 
-    public void OnBalloonTouchedBorder(Balloon balloon)
-    {
-        DamageAdded?.Invoke(balloon.Damage);
-    }
+    private void OnBalloonTouchedBorder(Balloon balloon) => DamageAdded?.Invoke(balloon.Damage);
 
     private void ReturnAllInPool()
     {
@@ -101,7 +116,7 @@ public class Spawner : MonoBehaviour
 
     private void CreateBalloon()
     {
-        Balloon balloon = _pool.GetElement();
+        var balloon = _pool.GetElement();
         balloon.Activate(GetSettings());
         balloon.Clicked.AddListener(OnBalloonClicked);
         balloon.BorderTouched.AddListener(OnBalloonTouchedBorder);

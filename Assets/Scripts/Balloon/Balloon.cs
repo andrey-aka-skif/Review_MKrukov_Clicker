@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Шар
+/// </summary>
 [RequireComponent(typeof(Renderer))]
 public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
 {
@@ -8,20 +11,43 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
     private float _acceleration;
     private Renderer _renderer;
 
+    /// <summary>
+    /// Клик на шаре
+    /// </summary>
     public BalloonClickedEvent Clicked;
+
+    /// <summary>
+    /// Шар коснулс¤ нижней границы
+    /// </summary>
     public BalloonTouchBorderEvent BorderTouched;
 
-    [HideInInspector] public BalloonDestroyedEvent Destroyed;
+    /// <summary>
+    /// Шар на сцене окончательно уничтожен 
+    /// </summary>
+    [HideInInspector] 
+    public BalloonDestroyedEvent Destroyed;
 
+    /// <summary>
+    /// Скорость падения
+    /// </summary>
     public float Speed { get; private set; }
+
+    /// <summary>
+    /// Очки, получаемые за клик
+    /// </summary>
     public int Prize { get; private set; }
+
+    /// <summary>
+    /// Штраф, получаемый при касании шаром нижней границы
+    /// </summary>
     public int Damage { get; private set; }
+
+    /// <summary>
+    /// Цвет шара
+    /// </summary>
     public Color Color { get; private set; }
 
-    private void Awake()
-    {
-        _renderer = GetComponent<Renderer>();
-    }
+    private void Awake() => _renderer = GetComponent<Renderer>();
 
     private void OnEnable()
     {
@@ -55,6 +81,14 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
         }
     }
 
+    /// <summary>
+    /// Шар готов к уничтожению и возврату в пул
+    /// </summary>
+    /// <remarks>
+    /// При наличии компонента, добавляющего длительный эффект,
+    /// компонент должен вызвать этот метод.
+    /// Нужно для запуска события, сообщающего об окончательном уничтожении шара
+    /// </remarks>
     public void OnReadyToDestroy()
     {
         Destroyed?.Invoke(this);
@@ -92,8 +126,7 @@ public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
     {
         _isAlive = false;
 
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         transform.localScale = Vector3.one;
         gameObject.SetActive(false);
     }

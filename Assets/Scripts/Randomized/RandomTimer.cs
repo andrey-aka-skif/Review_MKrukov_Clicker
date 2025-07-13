@@ -8,7 +8,7 @@ public sealed class RandomTimer
     private const float MIN_TIMEOUT_DEFAULT = 0.5f;
     private const float MAX_TIMEOUT_DEFAULT = 2.5f;
 
-    private readonly Random _rnd = new Random();
+    private readonly Random _rnd = new();
 
     private float _minTimeout;
     private float _maxTimeout;

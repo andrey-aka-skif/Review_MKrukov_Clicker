@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// Пул шаров
+/// </summary>
 public class BalloonPool
 {
     private readonly IBalloonCreator _creator;
@@ -16,6 +19,10 @@ public class BalloonPool
         FillWithNewElements(capacity);
     }
 
+    /// <summary>
+    /// Взять шар из пула
+    /// </summary>
+    /// <returns>Шар</returns>
     public Balloon GetElement()
     {
         if (_pool.Count < 1)
@@ -25,6 +32,10 @@ public class BalloonPool
         return _pool.Dequeue();
     }
 
+    /// <summary>
+    /// Вернуть шар в пул
+    /// </summary>
+    /// <param name="balloon">Возвращаемый шар</param>
     public void ReturnElement(Balloon balloon)
     {
         balloon.Deactivate();
@@ -33,7 +44,7 @@ public class BalloonPool
 
     private Balloon CreateNewElement()
     {
-        Balloon balloon = _creator.Create(_counter++);
+        var balloon = _creator.Create(_counter++);
         balloon.Deactivate();
         return balloon;
     }

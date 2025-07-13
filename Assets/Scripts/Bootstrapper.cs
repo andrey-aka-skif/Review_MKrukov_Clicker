@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class CompositionRoot : MonoBehaviour
+public class Bootstrapper : MonoBehaviour
 {
-    [SerializeField] private AppSettings _appSettings;
+    [SerializeField]
+    private AppSettings _appSettings;
 
-    [SerializeField] private Transform _spawnRoot;
+    [SerializeField]
+    private Transform _spawnRoot;
 
-    private void Awake()
-    {
-        Compose();
-    }
+    private void Awake() => Compose();
 
     public void Compose()
     {
@@ -31,7 +30,7 @@ public class CompositionRoot : MonoBehaviour
             _appSettings.MinSpeed,
             _appSettings.MaxSpeed);
 
-        var randomizerWithSpeedIncrease = new RandomizerWithSpeedIncrease(randomizer)
+        var randomizerWithSpeedIncrease = new AcceleratingRandomizerDecorator(randomizer)
         {
             Increase = _appSettings.SpeedIncrease
         };
@@ -52,7 +51,6 @@ public class CompositionRoot : MonoBehaviour
         limiter.Init(screenInformer);
 
         var score = FindFirstObjectByType<Score>();
-        score.Init(_appSettings.StartHealth,
-                    _appSettings.BestScoreKey);
+        score.Init(_appSettings.StartHealth, _appSettings.BestScoreKey);
     }
 }

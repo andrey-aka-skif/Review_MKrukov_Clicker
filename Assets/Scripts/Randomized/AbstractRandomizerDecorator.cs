@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
+/// <summary>
+/// Абстрактный декоратор рандомайзера для получения случайных характеристик шара
+/// </summary>
 public abstract class AbstractRandomizerDecorator : IRandomizer
 {
     protected Randomizer _randomizer;
@@ -10,12 +13,12 @@ public abstract class AbstractRandomizerDecorator : IRandomizer
     }
 
     public virtual Color Color => _randomizer.Color;
+
     public virtual int Damage => _randomizer.Damage;
+
     public virtual int Prize => _randomizer.Prize;
+
     public virtual float Speed => _randomizer.Speed;
 
-    public virtual void Reset()
-    {
-        _randomizer?.Reset();
-    }
+    public virtual void Reset() => _randomizer?.Reset();
 }

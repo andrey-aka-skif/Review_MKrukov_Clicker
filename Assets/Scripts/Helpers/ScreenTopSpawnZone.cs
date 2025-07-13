@@ -1,20 +1,29 @@
 using UnityEngine;
 using Random = System.Random;
 
+/// <summary>
+/// Зона спауна шаров
+/// </summary>
 public class ScreenTopSpawnZone : MonoBehaviour, ISpawnZone
 {
-    [SerializeField] private float _leftFramePadding = 0;
-    [SerializeField] private float _rightFramePadding = 0;
-    [SerializeField] private float _topFramePadding = 0;
+    [SerializeField] 
+    private float _leftFramePadding = 0;
 
-    [SerializeField] private float _spawnHeightInFramePercent = 25;
+    [SerializeField] 
+    private float _rightFramePadding = 0;
+
+    [SerializeField] 
+    private float _topFramePadding = 0;
+
+    [SerializeField] 
+    private float _spawnHeightInFramePercent = 25;
 
     private const float DEEP_BY_Z = 1.0f;
     private const float POSITION_Z = 0;
 
     private ScreenInformer _screen;
 
-    private readonly Random _rnd = new Random();
+    private readonly Random _rnd = new();
 
     public Vector3 Center { get; private set; }
     public Vector3 Size { get; private set; }

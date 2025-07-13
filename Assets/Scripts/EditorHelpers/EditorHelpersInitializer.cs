@@ -2,8 +2,11 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 
+/// <summary>
+/// Хелпер, позволяющий отобразить зоны в инспекторе
+/// </summary>
 [ExecuteInEditMode]
-public class HelpersInitializer : MonoBehaviour
+public class EditorHelpersInitializer : MonoBehaviour
 {
     private ScreenInformer _screenInformer;
 

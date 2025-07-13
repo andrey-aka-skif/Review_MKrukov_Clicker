@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Создатель шара
+/// </summary>
 public class BalloonCreator : IBalloonCreator
 {
     private readonly Balloon _prefab;
@@ -13,7 +16,7 @@ public class BalloonCreator : IBalloonCreator
 
     public Balloon Create(int number)
     {
-        Balloon balloon = Object.Instantiate(_prefab, _root);
+        var balloon = Object.Instantiate(_prefab, _root);
         balloon.transform.name = $"{typeof(Balloon)} ({number})";
         return balloon;
     }
