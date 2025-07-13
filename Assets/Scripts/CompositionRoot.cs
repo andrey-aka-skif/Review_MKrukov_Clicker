@@ -13,45 +13,46 @@ public class CompositionRoot : MonoBehaviour
 
     public void Compose()
     {
-        ScreenInformer screenInformer = FindObjectOfType<ScreenInformer>();
+        var screenInformer = FindFirstObjectByType<ScreenInformer>();
         screenInformer.Init();
 
-        ScreenTopSpawnZone spawnLimiter = FindObjectOfType<ScreenTopSpawnZone>();
+        var spawnLimiter = FindFirstObjectByType<ScreenTopSpawnZone>();
         spawnLimiter.Init(screenInformer);
 
-        BalloonCreator creator = new BalloonCreator(_appSettings.Prefab, 
-                                                    _spawnRoot);
+        var creator = new BalloonCreator(_appSettings.Prefab, _spawnRoot);
 
-        BalloonPool pool = new BalloonPool(creator, 
-                                            _appSettings.PoolCapacity);
+        var pool = new BalloonPool(creator, _appSettings.PoolCapacity);
 
-        RandomTimer timer = new RandomTimer(_appSettings.MinCreationTime, _appSettings.MaxCreationTime);
+        var timer = new RandomTimer(_appSettings.MinCreationTime, _appSettings.MaxCreationTime);
 
-        Randomizer randomizer = new Randomizer(   
-                                                    _appSettings.MaxPrize, 
-                                                    _appSettings.MaxDamage, 
-                                                    _appSettings.MinSpeed, 
-                                                    _appSettings.MaxSpeed);
+        var randomizer = new Randomizer(
+            _appSettings.MaxPrize,
+            _appSettings.MaxDamage,
+            _appSettings.MinSpeed,
+            _appSettings.MaxSpeed);
 
-        RandomizerWithSpeedIncrease randomizerWithSpeedIncrease = new RandomizerWithSpeedIncrease(randomizer);
-        randomizerWithSpeedIncrease.Increase = _appSettings.SpeedIncrease;
+        var randomizerWithSpeedIncrease = new RandomizerWithSpeedIncrease(randomizer)
+        {
+            Increase = _appSettings.SpeedIncrease
+        };
 
-        Spawner spawner = FindObjectOfType<Spawner>();
+        var spawner = FindFirstObjectByType<Spawner>();
         spawner.Init(pool,
                     timer,
-                    randomizerWithSpeedIncrease, 
-                    new SpawnerParams { 
+                    randomizerWithSpeedIncrease,
+                    new SpawnerParams
+                    {
                         MinTimeOut = _appSettings.MinCreationTime,
                         MaxTimeOut = _appSettings.MaxCreationTime,
                         CreationTimeDecrease = _appSettings.CreationTimeDecrease,
-                        Acceleration = _appSettings.Acceleration}
-                    );
+                        Acceleration = _appSettings.Acceleration
+                    });
 
-        DownScreenLimiter limiter = FindObjectOfType<DownScreenLimiter>();
+        var limiter = FindFirstObjectByType<DownScreenLimiter>();
         limiter.Init(screenInformer);
 
-        Score score = FindObjectOfType<Score>();
-        score.Init(_appSettings.StartHealth, 
+        var score = FindFirstObjectByType<Score>();
+        score.Init(_appSettings.StartHealth,
                     _appSettings.BestScoreKey);
     }
 }

@@ -13,21 +13,21 @@ public class HelpersInitializer : MonoBehaviour
 
     private void Update()
     {
-        if(_screenInformer == null)
+        if (_screenInformer == null)
         {
-            _screenInformer = FindObjectOfType<ScreenInformer>();
+            _screenInformer = FindFirstObjectByType<ScreenInformer>();
         }
         _screenInformer.Init();
 
-        if(_spawnZone == null)
+        if (_spawnZone == null)
         {
-            _spawnZone = FindObjectOfType<ScreenTopSpawnZone>();
+            _spawnZone = FindFirstObjectByType<ScreenTopSpawnZone>();
         }
         _spawnZone.Init(_screenInformer);
 
-        if(_downLimiter == null)
+        if (_downLimiter == null)
         {
-            _downLimiter = FindObjectOfType<DownScreenLimiter>();
+            _downLimiter = FindFirstObjectByType<DownScreenLimiter>();
         }
         _downLimiter.Init(_screenInformer);
     }
