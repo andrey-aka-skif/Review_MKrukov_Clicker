@@ -13,17 +13,13 @@ namespace Assets.Scripts.UI
         private Button _exitButton;
 
         [SerializeField]
-        private TextMeshPro _scoreValue;
-
-        [SerializeField]
-        private TextMeshPro _bestScoreValue;
+        private TMP_Text _bestScoreValue;
 
         protected void OnEnable()
         {
-            _playButton.onClick.AddListener(() => _gameState.Play());
+            _playButton.onClick.AddListener(() => _gameState.Start());
             _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
-            _scoreValue.text = _score.ScoreValue.ToString();
             _bestScoreValue.text = _score.BestScoreValue.ToString();
         }
 

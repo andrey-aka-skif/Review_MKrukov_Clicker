@@ -15,13 +15,13 @@ namespace Assets.Scripts.GameManagement
 
         public bool IsPaused => !_isPlaying && !_isDied;
 
-        public event Action OnPlayed;
+        public event Action OnStarted;
         public event Action OnPaused;
         public event Action OnResumed;
         public event Action OnDied;
         public event Action OnStop;
 
-        public void Play()
+        public void Start()
         {
             if (_isPlaying)
             {
@@ -32,7 +32,7 @@ namespace Assets.Scripts.GameManagement
             {
                 _isPlaying = true;
                 _isDied = false;
-                OnPlayed?.Invoke();
+                OnStarted?.Invoke();
             }
             else
             {
@@ -50,6 +50,11 @@ namespace Assets.Scripts.GameManagement
 
             _isPlaying = false;
             OnPaused?.Invoke();
+        }
+
+        public void Restart()
+        {
+            Start();
         }
 
         public void Die()
@@ -71,6 +76,13 @@ namespace Assets.Scripts.GameManagement
             OnStop?.Invoke();
         }
 
-        public void AppQuit() => Application.Quit();
+        public void AppQuit()
+        {
+#if UNITY_EDITOR
+            Debug.LogWarning("Application.Quit");
+#endif
+
+            Application.Quit();
+        }
     }
 }

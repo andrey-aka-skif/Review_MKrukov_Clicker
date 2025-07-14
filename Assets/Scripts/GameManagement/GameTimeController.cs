@@ -13,10 +13,11 @@ namespace Assets.Scripts.GameManagement
         {
             _gameState = gameState;
 
-            _gameState.OnPlayed += HandlePlay;
+            _gameState.OnStarted += HandlePlay;
             _gameState.OnPaused += HandlePause;
             _gameState.OnResumed += HandlePlay;
             _gameState.OnDied += HandlePause;
+            _gameState.OnStop += HandlePause;
         }
 
         private void OnDestroy()
@@ -26,7 +27,7 @@ namespace Assets.Scripts.GameManagement
                 return;
             }
 
-            _gameState.OnPlayed -= HandlePlay;
+            _gameState.OnStarted -= HandlePlay;
             _gameState.OnPaused -= HandlePause;
             _gameState.OnResumed -= HandlePlay;
             _gameState.OnDied -= HandlePause;

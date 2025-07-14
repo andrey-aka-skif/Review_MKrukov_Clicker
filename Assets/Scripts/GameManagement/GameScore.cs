@@ -12,8 +12,8 @@ namespace Assets.Scripts.GameManagement
 
         public event Action<int> ChangeBestScore;
 
-        private int _score;
-        private int _health;
+        private int _score = 0;
+        private int _health = 1;
 
         private readonly BestScoreSaver _bestScoreSaver;
 

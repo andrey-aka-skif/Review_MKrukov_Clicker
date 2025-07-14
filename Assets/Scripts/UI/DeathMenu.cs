@@ -7,21 +7,21 @@ namespace Assets.Scripts.UI
     public class DeathMenu : UIScreen
     {
         [SerializeField]
-        private Button _stopButton;
-
-        [SerializeField]
         private Button _playButton;
 
         [SerializeField]
-        private TextMeshPro _scoreValue;
+        private Button _exitButton;
 
         [SerializeField]
-        private TextMeshPro _bestScoreValue;
+        private TMP_Text _scoreValue;
+
+        [SerializeField]
+        private TMP_Text _bestScoreValue;
 
         private void OnEnable()
         {
-            _stopButton.onClick.AddListener(() => _gameState.Stop());
-            _playButton.onClick.AddListener(() => _gameState.Play());
+            _playButton.onClick.AddListener(() => _gameState.Start());
+            _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
             _scoreValue.text = _score.ScoreValue.ToString();
             _bestScoreValue.text = _score.BestScoreValue.ToString();
@@ -29,8 +29,8 @@ namespace Assets.Scripts.UI
 
         private void OnDisable()
         {
-            _stopButton.onClick.RemoveAllListeners();
             _playButton.onClick.RemoveAllListeners();
+            _exitButton.onClick.RemoveAllListeners();
         }
     }
 }

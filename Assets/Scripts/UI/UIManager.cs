@@ -19,22 +19,9 @@ namespace Assets.Scripts.UI
 
         private GameState _gameState;
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-            _gameState.OnPlayed += ShowGameMenu;
-            _gameState.OnPaused += ShowPauseMenu;
-            _gameState.OnResumed += ShowGameMenu;
-            _gameState.OnDied += ShowDeathMenu;
-            _gameState.OnStop += ShowStartMenu;
-        }
-
-        private void OnDisable()
-        {
-            _gameState.OnPlayed -= ShowGameMenu;
-            _gameState.OnPaused -= ShowPauseMenu;
-            _gameState.OnResumed -= ShowGameMenu;
-            _gameState.OnDied -= ShowDeathMenu;
-            _gameState.OnStop -= ShowStartMenu;
+            UnsubscribeFromStateEvents();
         }
 
         public void Init(GameState gameState, GameScore score)
@@ -45,6 +32,8 @@ namespace Assets.Scripts.UI
             _gameMenu.Init(gameState, score);
             _pauseMenu.Init(gameState, score);
             _deathMenu.Init(gameState, score);
+
+            SubscribeToStateEvents();
         }
 
         public void ShowStartMenu()
@@ -77,6 +66,30 @@ namespace Assets.Scripts.UI
             _gameMenu.Hide();
             _pauseMenu.Hide();
             _deathMenu.Show();
+        }
+
+        private void SubscribeToStateEvents()
+        {
+            if (_gameState == null)
+                return;
+
+            _gameState.OnStarted += ShowGameMenu;
+            _gameState.OnPaused += ShowPauseMenu;
+            _gameState.OnResumed += ShowGameMenu;
+            _gameState.OnDied += ShowDeathMenu;
+            _gameState.OnStop += ShowStartMenu;
+        }
+
+        private void UnsubscribeFromStateEvents()
+        {
+            if (_gameState == null)
+                return;
+
+            _gameState.OnStarted -= ShowGameMenu;
+            _gameState.OnPaused -= ShowPauseMenu;
+            _gameState.OnResumed -= ShowGameMenu;
+            _gameState.OnDied -= ShowDeathMenu;
+            _gameState.OnStop -= ShowStartMenu;
         }
     }
 }

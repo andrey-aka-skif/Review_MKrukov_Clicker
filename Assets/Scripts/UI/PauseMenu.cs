@@ -7,25 +7,25 @@ namespace Assets.Scripts.UI
     public class PauseMenu : UIScreen
     {
         [SerializeField]
-        private Button _exitButton;
+        private Button _resumeButton;
 
         [SerializeField]
         private Button _restartButton;
 
         [SerializeField]
-        private Button _resumeButton;
+        private Button _exitButton;
 
         [SerializeField]
-        private TextMeshPro _scoreValue;
+        private TMP_Text _scoreValue;
 
         [SerializeField]
-        private TextMeshPro _bestScoreValue;
+        private TMP_Text _bestScoreValue;
 
         protected void OnEnable()
         {
-            _exitButton.onClick.AddListener(() => _gameState.Stop());
-            _restartButton.onClick.AddListener(() => _gameState.Play());
-            _resumeButton.onClick.AddListener(() => _gameState.Play());
+            _resumeButton.onClick.AddListener(() => _gameState.Start());
+            _restartButton.onClick.AddListener(() => _gameState.Restart());
+            _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
             _scoreValue.text = _score.ScoreValue.ToString();
             _bestScoreValue.text = _score.BestScoreValue.ToString();
@@ -33,9 +33,9 @@ namespace Assets.Scripts.UI
 
         protected void OnDisable()
         {
-            _exitButton.onClick.RemoveAllListeners();
-            _restartButton.onClick.RemoveAllListeners();
             _resumeButton.onClick.RemoveAllListeners();
+            _restartButton.onClick.RemoveAllListeners();
+            _exitButton.onClick.RemoveAllListeners();
         }
     }
 }

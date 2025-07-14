@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.GameManagement
 {
@@ -6,12 +7,14 @@ namespace Assets.Scripts.GameManagement
     {
         internal int GetValue()
         {
-            throw new NotImplementedException();
+            Debug.LogWarning("Not Implemented");
+            return 42;
         }
 
         internal void SaveValue(int value)
         {
-            throw new NotImplementedException();
+
+            Debug.LogWarning("Not Implemented");
         }
     }
 }

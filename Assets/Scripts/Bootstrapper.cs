@@ -17,16 +17,19 @@ public class Bootstrapper : MonoBehaviour
         var gameTimeController = FindFirstObjectByTypeOrAdd<GameTimeController>();
         gameTimeController.Init(gameState);
 
+        gameState.Stop();
+
         var scoreSaver = new BestScoreSaver();
         var score = new GameScore(scoreSaver);
 
         var uiManager = FindFirstObjectByTypeOrThrow<UIManager>();
         uiManager.Init(gameState, score);
+        uiManager.ShowStartMenu();
 
         Compose();
     }
 
-    public void Compose()
+    private void Compose()
     {
         var screenInformer = FindFirstObjectByType<ScreenInformer>();
         screenInformer.Init();
