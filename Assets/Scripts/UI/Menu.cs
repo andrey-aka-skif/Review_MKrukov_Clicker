@@ -6,34 +6,34 @@ using UnityEngine.UI;
 /// </summary>
 public class Menu : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private RectTransform _topMenu;
 
-    [SerializeField] 
+    [SerializeField]
     private RectTransform _pauseMenu;
 
-    [SerializeField] 
+    [SerializeField]
     private RectTransform _deadMenu;
 
 
-    [SerializeField] 
+    [SerializeField]
     private Text _mainMenuScore;
 
-    [SerializeField] 
+    [SerializeField]
     private Text _mainMenuHealth;
 
 
-    [SerializeField] 
+    [SerializeField]
     private Text _pauseMenuScore;
 
-    [SerializeField] 
+    [SerializeField]
     private Text _pauseMenuBestScore;
 
 
-    [SerializeField] 
+    [SerializeField]
     private Text _deadMenuScore;
 
-    [SerializeField] 
+    [SerializeField]
     private Text _deadMenuBestScore;
 
     /// <summary>

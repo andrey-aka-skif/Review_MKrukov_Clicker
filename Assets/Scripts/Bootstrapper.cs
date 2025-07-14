@@ -1,3 +1,6 @@
+using Assets.Scripts.GameManagement;
+using Assets.Scripts.UI;
+using System;
 using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour
@@ -8,7 +11,20 @@ public class Bootstrapper : MonoBehaviour
     [SerializeField]
     private Transform _spawnRoot;
 
-    private void Awake() => Compose();
+    private void Awake()
+    {
+        var gameState = new GameState();
+        var gameTimeController = FindFirstObjectByTypeOrAdd<GameTimeController>();
+        gameTimeController.Init(gameState);
+
+        var scoreSaver = new BestScoreSaver();
+        var score = new GameScore(scoreSaver);
+
+        var uiManager = FindFirstObjectByTypeOrThrow<UIManager>();
+        uiManager.Init(gameState, score);
+
+        Compose();
+    }
 
     public void Compose()
     {
@@ -52,5 +68,24 @@ public class Bootstrapper : MonoBehaviour
 
         var score = FindFirstObjectByType<Score>();
         score.Init(_appSettings.StartHealth, _appSettings.BestScoreKey);
+    }
+
+    private T FindFirstObjectByTypeOrThrow<T>() where T : Component
+    {
+        var obj = FindFirstObjectByType<T>();
+        return obj ?? throw new NullReferenceException();
+    }
+
+    private T FindFirstObjectByTypeOrAdd<T>(GameObject parent = null) where T : Component
+    {
+        var instance = FindFirstObjectByType<T>();
+
+        if (instance != null)
+            return instance;
+
+        if (parent == null)
+            parent = gameObject;
+
+        return parent.AddComponent<T>();
     }
 }
