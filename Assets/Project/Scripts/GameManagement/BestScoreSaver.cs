@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.GameManagement
+namespace Assets.Project.Scripts.GameManagement
 {
     public class BestScoreSaver
     {

@@ -1,7 +1,7 @@
-using Assets.Scripts.GameManagement;
+using Assets.Project.Scripts.GameManagement;
 using UnityEngine;
 
-namespace Assets.Scripts.UI
+namespace Assets.Project.Scripts.UI
 {
     public class UIManager : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.GameManagement
+namespace Assets.Project.Scripts.GameManagement
 {
     /// <summary>
     /// Контроллер игрового времени через Time.timeScale

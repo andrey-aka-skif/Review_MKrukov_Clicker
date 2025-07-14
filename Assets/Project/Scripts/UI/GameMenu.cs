@@ -1,9 +1,9 @@
-using Assets.Scripts.GameManagement;
+using Assets.Project.Scripts.GameManagement;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.UI
+namespace Assets.Project.Scripts.UI
 {
     public class GameMenu : UIScreen
     {

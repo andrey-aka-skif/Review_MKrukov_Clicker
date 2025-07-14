@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.GameManagement
+namespace Assets.Project.Scripts.GameManagement
 {
     public class GameScore
     {

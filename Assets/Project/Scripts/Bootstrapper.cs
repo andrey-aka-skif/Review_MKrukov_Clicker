@@ -1,5 +1,5 @@
-using Assets.Scripts.GameManagement;
-using Assets.Scripts.UI;
+using Assets.Project.Scripts.GameManagement;
+using Assets.Project.Scripts.UI;
 using System;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.GameManagement
+namespace Assets.Project.Scripts.GameManagement
 {
     /// <summary>
     /// Состояние игры
