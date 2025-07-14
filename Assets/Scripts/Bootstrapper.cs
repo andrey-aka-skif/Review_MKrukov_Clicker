@@ -68,9 +68,6 @@ public class Bootstrapper : MonoBehaviour
 
         var limiter = FindFirstObjectByType<DownScreenLimiter>();
         limiter.Init(screenInformer);
-
-        var score = FindFirstObjectByType<Score>();
-        score.Init(_appSettings.StartHealth, _appSettings.BestScoreKey);
     }
 
     private T FindFirstObjectByTypeOrThrow<T>() where T : Component

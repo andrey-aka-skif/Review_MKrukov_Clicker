@@ -14,10 +14,7 @@ namespace Assets.Scripts.UI
             _score = score;
         }
 
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
+        public void Show() => gameObject.SetActive(true);
 
         public void Hide() => gameObject.SetActive(false);
 
