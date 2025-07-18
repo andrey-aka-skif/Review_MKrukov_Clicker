@@ -6,9 +6,17 @@ namespace Assets.Project.Scripts.ScreenHelpers
     /// Компонент инспектора, предоставляющий информацию 
     /// о размере экрана в единицах сцены
     /// </summary>
-    public class ScreenSizeInformer : MonoBehaviour
+    public class ScreenSizeInformer
     {
-        private Camera _camera;
+        private readonly Camera _camera;
+
+        public ScreenSizeInformer(Camera camera)
+        {
+            if (camera == null)
+                throw new System.NullReferenceException("В сцене отсутствует камера");
+
+            _camera = camera;
+        }
 
         /// <summary>
         /// Ширина экрана в единицах сцены
@@ -33,6 +41,7 @@ namespace Assets.Project.Scripts.ScreenHelpers
         /// <summary>
         /// Верхняя граница экрана в координатах сцены
         /// </summary>
+
         public float WorldBoundaryTop { get; private set; }
 
         /// <summary>
@@ -41,17 +50,10 @@ namespace Assets.Project.Scripts.ScreenHelpers
         public float WorldBoundaryBottom { get; private set; }
 
         /// <summary>
-        /// Инициализировать информер
+        /// Пересчитать
         /// </summary>
-        public void Init() => GetInfo();
-
-        private void GetInfo()
+        public void Calculate()
         {
-            if (_camera == null)
-            {
-                _camera = Camera.main;
-            }
-
             var cameraZ = Mathf.Abs(_camera.transform.position.z);
 
             var leftBottomFramePoint = _camera.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));

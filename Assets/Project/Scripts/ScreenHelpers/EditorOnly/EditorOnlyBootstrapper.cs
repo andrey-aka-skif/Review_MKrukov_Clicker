@@ -15,17 +15,14 @@ namespace Assets.Project.Scripts.ScreenHelpers.EditorOnly
         private ScreenTopSpawnZone _spawnZone;
         private ScreenDownLimiter _downLimiter;
 
-        private void OnEnable() => EditorApplication.update += InitComponents;
+        private void OnEnable() => EditorApplication.update += ReInitComponents;
 
-        private void OnDisable() => EditorApplication.update -= InitComponents;
+        private void OnDisable() => EditorApplication.update -= ReInitComponents;
 
-        private void InitComponents()
+        private void ReInitComponents()
         {
-            if (_screenInformer == null)
-            {
-                _screenInformer = FindFirstObjectByType<ScreenSizeInformer>();
-            }
-            _screenInformer.Init();
+            _screenInformer ??= new ScreenSizeInformer(Camera.main);
+            _screenInformer.Calculate();
 
             if (_spawnZone == null)
             {

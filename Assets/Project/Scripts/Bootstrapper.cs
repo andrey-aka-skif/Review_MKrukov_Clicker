@@ -27,17 +27,20 @@ public class Bootstrapper : MonoBehaviour
         uiManager.Init(gameState, score);
         uiManager.ShowStartMenu();
 
+        var screenInformer = new ScreenSizeInformer(Camera.main);
+        screenInformer.Calculate();
+
+        var spawnZone = FindFirstObjectByType<ScreenTopSpawnZone>();
+        spawnZone.Init(screenInformer);
+
+        var limitZone = FindFirstObjectByType<ScreenDownLimiter>();
+        limitZone.Init(screenInformer);
+
         Compose();
     }
 
     private void Compose()
     {
-        var screenInformer = FindFirstObjectByType<ScreenSizeInformer>();
-        screenInformer.Init();
-
-        var spawnLimiter = FindFirstObjectByType<ScreenTopSpawnZone>();
-        spawnLimiter.Init(screenInformer);
-
         var creator = new BalloonCreator(_appSettings.Prefab, _spawnRoot);
 
         var pool = new BalloonPool(creator, _appSettings.PoolCapacity);
@@ -67,8 +70,6 @@ public class Bootstrapper : MonoBehaviour
                         Acceleration = _appSettings.Acceleration
                     });
 
-        var limiter = FindFirstObjectByType<ScreenDownLimiter>();
-        limiter.Init(screenInformer);
     }
 
     private T FindFirstObjectByTypeOrThrow<T>() where T : Component

@@ -1624,7 +1624,6 @@ GameObject:
   - component: {fileID: 351272977}
   - component: {fileID: 351272979}
   - component: {fileID: 351272981}
-  - component: {fileID: 351272982}
   m_Layer: 0
   m_Name: Bootstrapper
   m_TagString: Untagged
@@ -1683,18 +1682,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eed49c3eb2d16940b87ed89aa56d95e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &351272982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351272976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81c079997643aee4ca1dfad60a61eb94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &372150729
@@ -5168,7 +5155,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.89109, y: 1, z: 2}
+  m_Size: {x: 7.9742575, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1911444146
 Transform:
