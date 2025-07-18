@@ -3,68 +3,71 @@ using Random = System.Random;
 
 namespace Assets.Project.Scripts.ScreenHelpers
 {
-
     /// <summary>
     /// Зона спауна шаров
     /// </summary>
+    /// <remarks>
+    /// Располагается вверху экрана
+    /// </remarks>
     public class ScreenTopSpawnZone : MonoBehaviour, ISpawnZone
     {
         [SerializeField]
-        private float _leftFramePadding = 0;
+        private float _screenMarginLeft = .5f;
 
         [SerializeField]
-        private float _rightFramePadding = 0;
+        private float _screenMarginRight = .5f;
 
         [SerializeField]
-        private float _topFramePadding = 0;
+        private float _screenMarginTop = 0;
 
         [SerializeField]
-        private float _spawnHeightInFramePercent = 25;
+        private float _heightInFramePercent = 25f;
 
         private const float DEEP_BY_Z = 1.0f;
         private const float POSITION_Z = 0;
 
-        private ScreenInformer _screen;
+        private ScreenSizeInformer _screen;
 
         private readonly Random _rnd = new();
 
         public Vector3 Center { get; private set; }
         public Vector3 Size { get; private set; }
 
-        public void Init(ScreenInformer screen)
+        public void Init(ScreenSizeInformer screen)
         {
             _screen = screen;
-
             Calculate();
+            Place();
         }
 
         public Vector3 GetRndPosition()
         {
-            float rndX = (float)(_rnd.NextDouble() * (GetRightLimit() - GetLeftLimit()) + GetLeftLimit());
-            float rndY = (float)(_rnd.NextDouble() * (GetTopLimit() - GetBottomLimit()) + GetBottomLimit());
-
-            return new Vector3(rndX, rndY);
+            return new Vector3(
+                (float)(_rnd.NextDouble() * (WorldBoundaryRight - WorldBoundaryLeft) + WorldBoundaryLeft),
+                (float)(_rnd.NextDouble() * (WorldBoundaryTop - WorldBoundaryBottom) + WorldBoundaryBottom));
         }
 
         private void Calculate()
         {
             Center = new Vector3(
-                (GetLeftLimit() + GetRightLimit()) / 2,
-                (GetTopLimit() + GetBottomLimit()) / 2,
+                (WorldBoundaryLeft + WorldBoundaryRight) / 2,
+                (WorldBoundaryTop + WorldBoundaryBottom) / 2,
                 POSITION_Z);
 
             Size = new Vector3(
-                GetRightLimit() - GetLeftLimit(),
-                GetTopLimit() - GetBottomLimit(),
+                WorldBoundaryRight - WorldBoundaryLeft,
+                WorldBoundaryTop - WorldBoundaryBottom,
                 DEEP_BY_Z);
         }
 
-        private float GetLeftLimit() => _screen.SceneLeftLimit + _leftFramePadding;
+        private void Place() => transform.position = Center;
 
-        private float GetRightLimit() => _screen.SceneRightLimit - _rightFramePadding;
+        private float WorldBoundaryLeft => _screen.WorldBoundaryLeft + _screenMarginLeft;
 
-        private float GetTopLimit() => _screen.SceneTopLimit - _topFramePadding;
+        private float WorldBoundaryRight => _screen.WorldBoundaryRight - _screenMarginRight;
 
-        private float GetBottomLimit() => GetTopLimit() - _screen.SceneHeight * _spawnHeightInFramePercent / 100;
+        private float WorldBoundaryTop => _screen.WorldBoundaryTop - _screenMarginTop;
+
+        private float WorldBoundaryBottom => WorldBoundaryTop - _screen.WorldHeight * _heightInFramePercent / 100;
     }
 }

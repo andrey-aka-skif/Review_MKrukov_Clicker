@@ -32,7 +32,7 @@ public class Bootstrapper : MonoBehaviour
 
     private void Compose()
     {
-        var screenInformer = FindFirstObjectByType<ScreenInformer>();
+        var screenInformer = FindFirstObjectByType<ScreenSizeInformer>();
         screenInformer.Init();
 
         var spawnLimiter = FindFirstObjectByType<ScreenTopSpawnZone>();
@@ -67,7 +67,7 @@ public class Bootstrapper : MonoBehaviour
                         Acceleration = _appSettings.Acceleration
                     });
 
-        var limiter = FindFirstObjectByType<DownScreenLimiter>();
+        var limiter = FindFirstObjectByType<ScreenDownLimiter>();
         limiter.Init(screenInformer);
     }
 
