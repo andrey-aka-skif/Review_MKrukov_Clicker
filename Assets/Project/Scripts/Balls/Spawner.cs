@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     private IRandomizer _randomizer;
 
     private ISpawnZone _spawnZone;
-    private BalloonPool _pool;
+    private BallPool _pool;
 
     private readonly List<Ball> _spawned = new();
 
@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
     /// <param name="param">Объект, содержащий прочие настройки спаунера</param>
     /// <exception cref="ArgumentNullException">Не найден объект, представляющий зону спауна</exception>
     public void Init(
-        BalloonPool pool,
+        BallPool pool,
         RandomTimer timer,
         IRandomizer randomizer,
         SpawnerParams param)

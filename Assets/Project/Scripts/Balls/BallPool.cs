@@ -3,14 +3,14 @@ using System.Collections.Generic;
 /// <summary>
 /// Пул шаров
 /// </summary>
-public class BalloonPool
+public class BallPool
 {
     private readonly IBalloonCreator _creator;
     private readonly Queue<Ball> _pool;
 
     private int _counter;
 
-    public BalloonPool(IBalloonCreator creator, int capacity = 10)
+    public BallPool(IBalloonCreator creator, int capacity = 10)
     {
         _creator = creator;
 

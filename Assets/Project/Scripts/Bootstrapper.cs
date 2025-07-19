@@ -43,7 +43,7 @@ public class Bootstrapper : MonoBehaviour
     {
         var creator = new BallCreator(_appSettings.Prefab, _spawnRoot);
 
-        var pool = new BalloonPool(creator, _appSettings.PoolCapacity);
+        var pool = new BallPool(creator, _appSettings.PoolCapacity);
 
         var timer = new RandomTimer(_appSettings.MinCreationTime, _appSettings.MaxCreationTime);
 
