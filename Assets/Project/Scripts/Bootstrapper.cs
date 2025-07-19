@@ -41,7 +41,7 @@ public class Bootstrapper : MonoBehaviour
 
     private void Compose()
     {
-        var creator = new BalloonCreator(_appSettings.Prefab, _spawnRoot);
+        var creator = new BallCreator(_appSettings.Prefab, _spawnRoot);
 
         var pool = new BalloonPool(creator, _appSettings.PoolCapacity);
 
