@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Компонент отвечает за эффект взрыва шара
 /// </summary>
-public class BalloonBurster : MonoBehaviour
+public class BallBurster : MonoBehaviour
 {
     [SerializeField] 
     private float _boomScaleMultiplier = 2;
