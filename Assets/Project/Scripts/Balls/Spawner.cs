@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     private IRandomizer _randomizer;
 
     private ISpawnZone _spawnZone;
-    private BallPool _pool;
+    private Pool<Ball, BallSettings> _pool;
 
     private readonly List<Ball> _spawned = new();
 
@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
     /// <param name="param">Объект, содержащий прочие настройки спаунера</param>
     /// <exception cref="ArgumentNullException">Не найден объект, представляющий зону спауна</exception>
     public void Init(
-        BallPool pool,
+        Pool<Ball, BallSettings> pool,
         RandomTimer timer,
         IRandomizer randomizer,
         SpawnerParams param)
@@ -95,9 +95,9 @@ public class Spawner : MonoBehaviour
             _spawned.Remove(balloon);
         }
 
-        balloon.Clicked.RemoveListener(OnBalloonClicked);
-        balloon.BorderTouched.RemoveListener(OnBalloonTouchedBorder);
-        balloon.Destroyed.RemoveListener(OnBalloonDestroyed);
+        balloon.Clicked -= OnBalloonClicked;
+        balloon.Killed -= OnBalloonTouchedBorder;
+        balloon.FinalyDestroyed -= OnBalloonDestroyed;
 
         _pool.ReturnElement(balloon);
     }
@@ -118,9 +118,9 @@ public class Spawner : MonoBehaviour
     {
         var balloon = _pool.GetElement();
         balloon.Activate(GetSettings());
-        balloon.Clicked.AddListener(OnBalloonClicked);
-        balloon.BorderTouched.AddListener(OnBalloonTouchedBorder);
-        balloon.Destroyed.AddListener(OnBalloonDestroyed);
+        balloon.Clicked += OnBalloonClicked;
+        balloon.Killed += OnBalloonTouchedBorder;
+        balloon.FinalyDestroyed += OnBalloonDestroyed;
 
         _spawned.Add(balloon);
     }

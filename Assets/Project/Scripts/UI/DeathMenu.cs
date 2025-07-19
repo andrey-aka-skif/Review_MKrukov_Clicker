@@ -20,7 +20,7 @@ namespace Assets.Project.Scripts.UI
 
         private void OnEnable()
         {
-            _playButton.onClick.AddListener(() => _gameState.Start());
+            _playButton.onClick.AddListener(() => _gameState.Play());
             _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
             _scoreValue.text = _score.ScoreValue.ToString();

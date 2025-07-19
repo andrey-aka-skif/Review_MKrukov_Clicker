@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 531560700084021916}
   - component: {fileID: 8596647813316704547}
   - component: {fileID: 6828843937225037889}
-  - component: {fileID: 2871242259304217074}
+  - component: {fileID: 2952107551457391023}
   - component: {fileID: 6030669717605175825}
   m_Layer: 0
   m_Name: Ball
@@ -139,7 +139,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2871242259304217074
+--- !u!114 &2952107551457391023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,18 +148,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4105055430891142867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea098de79b62b824bbbc7a0d25fe9740, type: 3}
+  m_Script: {fileID: 11500000, guid: f4d635399fde58b4697c662d939c336f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clicked:
-    m_PersistentCalls:
-      m_Calls: []
-  BorderTouched:
-    m_PersistentCalls:
-      m_Calls: []
-  Destroyed:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6030669717605175825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9990,7 +9981,7 @@ MonoBehaviour:
   Exploded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2871242259304217074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Balloon, Assembly-CSharp
         m_MethodName: OnReadyToDestroy
         m_Mode: 1

@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Создатель шара
 /// </summary>
-public class BallCreator : IBallCreator
+public class BallCreator : IItemCreator<Ball>
 {
     private readonly Ball _prefab;
     private readonly Transform _root;
@@ -16,8 +16,9 @@ public class BallCreator : IBallCreator
 
     public Ball Create(int number)
     {
-        var balloon = Object.Instantiate(_prefab, _root);
-        balloon.transform.name = $"{typeof(Ball)} ({number})";
-        return balloon;
+        throw new System.NotImplementedException();
+        //var balloon = Object.Instantiate(_prefab, _root);
+        //balloon.transform.name = $"{typeof(Ball)} ({number})";
+        //return balloon;
     }
 }

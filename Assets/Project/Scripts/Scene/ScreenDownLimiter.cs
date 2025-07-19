@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Assets.Project.Scripts.ScreenHelpers
@@ -10,7 +9,7 @@ namespace Assets.Project.Scripts.ScreenHelpers
     /// Располагается снизу экрана
     /// </remarks>
     [RequireComponent(typeof(BoxCollider))]
-    public class ScreenDownLimiter : MonoBehaviour, IZoned, ILimit
+    public class ScreenDownLimiter : MonoBehaviour, IZoned
     {
         [SerializeField]
         private float _thickness = 1f;
@@ -63,6 +62,12 @@ namespace Assets.Project.Scripts.ScreenHelpers
             var collider = GetComponent<BoxCollider>();
             collider.isTrigger = true;
             collider.size = Size;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (TryGetComponent<IDamageable>(out var damageable))
+                damageable.Kill();
         }
     }
 }

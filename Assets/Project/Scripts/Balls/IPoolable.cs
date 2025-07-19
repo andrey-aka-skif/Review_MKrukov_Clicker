@@ -1,18 +1,9 @@
 /// <summary>
 /// Объект, который может быть использован в пуле
 /// </summary>
-public interface IPoolable
-{
-    /// <summary>
-    /// Активировать объект
-    /// </summary>
-    /// <param name="settings">
-    /// Объект настроек, с которыми создается объект пула
-    /// </param>
-    void Activate(BallSettings settings);
+/// <remarks>
+/// Оборачивает <seealso cref="IActivatable{TSettings}"/> для явного указания на использование в пуле
+/// </remarks>
+public interface IPoolable<TSettings> : IActivatable<TSettings> { }
 
-    /// <summary>
-    /// Деактивировать объект
-    /// </summary>
-    void Deactivate();
-}
+public interface IPoolable : IActivatable { }

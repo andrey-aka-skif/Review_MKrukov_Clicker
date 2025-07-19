@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Project.Scripts.GameManagement
@@ -10,6 +11,12 @@ namespace Assets.Project.Scripts.GameManagement
     {
         private bool _isPlaying = false;
         private bool _isDied = true;
+        private readonly List<IPausable> _pauseables;
+
+        public GameState(List<IPausable> pauseables)
+        {
+            _pauseables = pauseables;
+        }
 
         public bool IsPlaying => _isPlaying;
 
@@ -21,7 +28,7 @@ namespace Assets.Project.Scripts.GameManagement
         public event Action OnDied;
         public event Action OnStop;
 
-        public void Start()
+        public void Play()
         {
             if (_isPlaying)
             {
@@ -39,6 +46,8 @@ namespace Assets.Project.Scripts.GameManagement
                 _isPlaying = true;
                 OnResumed?.Invoke();
             }
+
+            PlayAll();
         }
 
         public void Pause()
@@ -49,12 +58,13 @@ namespace Assets.Project.Scripts.GameManagement
             }
 
             _isPlaying = false;
+            PauseAll();
             OnPaused?.Invoke();
         }
 
         public void Restart()
         {
-            Start();
+            Play();
         }
 
         public void Die()
@@ -64,6 +74,7 @@ namespace Assets.Project.Scripts.GameManagement
                 return;
             }
 
+            StopAll();
             _isPlaying = false;
             _isDied = true;
             OnDied?.Invoke();
@@ -73,6 +84,7 @@ namespace Assets.Project.Scripts.GameManagement
         {
             _isPlaying = false;
             _isDied = true;
+            StopAll();
             OnStop?.Invoke();
         }
 
@@ -83,6 +95,30 @@ namespace Assets.Project.Scripts.GameManagement
 #endif
 
             Application.Quit();
+        }
+
+        private void PlayAll()
+        {
+            foreach (var item in _pauseables)
+            {
+                item.Play();
+            }
+        }
+
+        private void StopAll()
+        {
+            foreach (var item in _pauseables)
+            {
+                item.Stop();
+            }
+        }
+
+        private void PauseAll()
+        {
+            foreach (var item in _pauseables)
+            {
+                item.Pause();
+            }
         }
     }
 }

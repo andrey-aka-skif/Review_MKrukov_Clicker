@@ -2,6 +2,7 @@ using Assets.Project.Scripts.GameManagement;
 using Assets.Project.Scripts.ScreenHelpers;
 using Assets.Project.Scripts.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour
@@ -14,18 +15,11 @@ public class Bootstrapper : MonoBehaviour
 
     private void Awake()
     {
-        var gameState = new GameState();
-        var gameTimeController = FindFirstObjectByTypeOrAdd<GameTimeController>();
-        gameTimeController.Init(gameState);
+        var pauseables = new List<IPausable>(); // сюда добавить всех, кого нужно останавливать и передать их в gameState
+        var tickeds = new List<ITicked>();
 
-        gameState.Stop();
-
-        var scoreSaver = new BestScoreSaver();
+    var scoreSaver = new BestScoreSaver();
         var score = new GameScore(scoreSaver);
-
-        var uiManager = FindFirstObjectByTypeOrThrow<UIManager>();
-        uiManager.Init(gameState, score);
-        uiManager.ShowStartMenu();
 
         var screenInformer = new ScreenSizeInformer(Camera.main);
         screenInformer.Calculate();
@@ -36,14 +30,31 @@ public class Bootstrapper : MonoBehaviour
         var limitZone = FindFirstObjectByType<ScreenDownLimiter>();
         limitZone.Init(screenInformer);
 
+        var ballsSystem = new BallsSystem(null, null, score);
+        pauseables.Add(ballsSystem);
+        tickeds.Add(ballsSystem);
+
         Compose();
+
+        var customUpdater = FindFirstObjectByTypeOrAdd<CustomUpdater>();
+        customUpdater.Init(tickeds);
+
+        var gameState = new GameState(pauseables);
+        var gameTimeController = FindFirstObjectByTypeOrAdd<GameTimeController>();
+        gameTimeController.Init(gameState);
+
+        gameState.Stop();
+
+        var uiManager = FindFirstObjectByTypeOrThrow<UIManager>();
+        uiManager.Init(gameState, score);
+        uiManager.ShowStartMenu();
     }
 
     private void Compose()
     {
         var creator = new BallCreator(_appSettings.Prefab, _spawnRoot);
 
-        var pool = new BallPool(creator, _appSettings.PoolCapacity);
+        var pool = new Pool<Ball, BallSettings>(creator, _appSettings.PoolCapacity);
 
         var timer = new RandomTimer(_appSettings.MinCreationTime, _appSettings.MaxCreationTime);
 

@@ -17,7 +17,7 @@ namespace Assets.Project.Scripts.UI
 
         protected void OnEnable()
         {
-            _playButton.onClick.AddListener(() => _gameState.Start());
+            _playButton.onClick.AddListener(() => _gameState.Play());
             _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
             _bestScoreValue.text = _score.BestScoreValue.ToString();

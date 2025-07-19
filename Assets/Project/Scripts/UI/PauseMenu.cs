@@ -23,7 +23,7 @@ namespace Assets.Project.Scripts.UI
 
         protected void OnEnable()
         {
-            _resumeButton.onClick.AddListener(() => _gameState.Start());
+            _resumeButton.onClick.AddListener(() => _gameState.Play());
             _restartButton.onClick.AddListener(() => _gameState.Restart());
             _exitButton.onClick.AddListener(() => _gameState.AppQuit());
 
