@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class BalloonPool
 {
     private readonly IBalloonCreator _creator;
-    private readonly Queue<Balloon> _pool;
+    private readonly Queue<Ball> _pool;
 
     private int _counter;
 
@@ -14,7 +14,7 @@ public class BalloonPool
     {
         _creator = creator;
 
-        _pool = new Queue<Balloon>(capacity);
+        _pool = new Queue<Ball>(capacity);
 
         FillWithNewElements(capacity);
     }
@@ -23,7 +23,7 @@ public class BalloonPool
     /// Взять шар из пула
     /// </summary>
     /// <returns>Шар</returns>
-    public Balloon GetElement()
+    public Ball GetElement()
     {
         if (_pool.Count < 1)
         {
@@ -36,13 +36,13 @@ public class BalloonPool
     /// Вернуть шар в пул
     /// </summary>
     /// <param name="balloon">Возвращаемый шар</param>
-    public void ReturnElement(Balloon balloon)
+    public void ReturnElement(Ball balloon)
     {
         balloon.Deactivate();
         _pool.Enqueue(balloon);
     }
 
-    private Balloon CreateNewElement()
+    private Ball CreateNewElement()
     {
         var balloon = _creator.Create(_counter++);
         balloon.Deactivate();

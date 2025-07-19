@@ -12,7 +12,7 @@ public class BalloonBurster : MonoBehaviour
     [SerializeField] 
     private float _boomGrowSpeed = 2;
 
-    private Balloon _balloon;
+    private Ball _balloon;
 
     /// <summary>
     /// Эффект взрыва завершен
@@ -27,7 +27,7 @@ public class BalloonBurster : MonoBehaviour
     /// Запустить анимацию взрыва
     /// </summary>
     /// <param name="balloon">Шар, который должен быть уничтожен после взрыва</param>
-    public void OnReadyToDestroy(Balloon balloon)
+    public void OnReadyToDestroy(Ball balloon)
     {
         _balloon = balloon;
         StartCoroutine(Burst());

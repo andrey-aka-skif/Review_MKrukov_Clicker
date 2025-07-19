@@ -11,5 +11,5 @@ public interface IBalloonCreator
     /// для уникального имени в инспекторе
     /// </param>
     /// <returns>Шар</returns>
-    Balloon Create(int number);
+    Ball Create(int number);
 }

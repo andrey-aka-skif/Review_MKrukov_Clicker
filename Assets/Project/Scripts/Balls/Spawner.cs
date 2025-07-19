@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     private ISpawnZone _spawnZone;
     private BalloonPool _pool;
 
-    private readonly List<Balloon> _spawned = new();
+    private readonly List<Ball> _spawned = new();
 
     /// <summary>
     /// Инициализировать спаунер
@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void OnBalloonDestroyed(Balloon balloon)
+    private void OnBalloonDestroyed(Ball balloon)
     {
         if (_spawned.Contains(balloon))
         {
@@ -102,13 +102,13 @@ public class Spawner : MonoBehaviour
         _pool.ReturnElement(balloon);
     }
 
-    private void OnBalloonClicked(Balloon balloon) => ScoreAdded?.Invoke(balloon.Prize);
+    private void OnBalloonClicked(Ball balloon) => ScoreAdded?.Invoke(balloon.Prize);
 
-    private void OnBalloonTouchedBorder(Balloon balloon) => DamageAdded?.Invoke(balloon.Damage);
+    private void OnBalloonTouchedBorder(Ball balloon) => DamageAdded?.Invoke(balloon.Damage);
 
     private void ReturnAllInPool()
     {
-        foreach (Balloon item in _spawned)
+        foreach (Ball item in _spawned)
         {
             _pool.ReturnElement(item);
         }

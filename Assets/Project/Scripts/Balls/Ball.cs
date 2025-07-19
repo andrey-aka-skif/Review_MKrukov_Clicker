@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 /// Шар
 /// </summary>
 [RequireComponent(typeof(Renderer))]
-public class Balloon : MonoBehaviour, IPointerDownHandler, IPoolable
+public class Ball : MonoBehaviour, IPointerDownHandler, IPoolable
 {
     private bool _isAlive;
     private float _acceleration;

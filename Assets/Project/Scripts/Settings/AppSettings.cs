@@ -7,7 +7,7 @@ using UnityEngine;
 public class AppSettings : ScriptableObject
 {
     [SerializeField]
-    private Balloon _prefab;
+    private Ball _prefab;
 
 
     [SerializeField]
@@ -55,7 +55,7 @@ public class AppSettings : ScriptableObject
     private string _bestScoreKey = "BestScore";
 
 
-    public Balloon Prefab => _prefab;
+    public Ball Prefab => _prefab;
     public float MinCreationTime => _minCreationTime;
     public float MaxCreationTime => _maxCreationTime;
     public int PoolCapacity => _poolCapacity;

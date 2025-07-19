@@ -10,7 +10,7 @@ public class ParticleFuse : MonoBehaviour
     [SerializeField]
     private ParticleSystem _smoke;
 
-    private Balloon _balloon;
+    private Ball _balloon;
     private ParticleSystem _particleSystem;
     private ParticleSystemRenderer _renderer;
 
@@ -32,7 +32,7 @@ public class ParticleFuse : MonoBehaviour
         _particleSystem = GetComponent<ParticleSystem>();
     }
 
-    public void Explode(Balloon balloon)
+    public void Explode(Ball balloon)
     {
         _balloon = balloon;
         SetSmokeColor(balloon.Color);

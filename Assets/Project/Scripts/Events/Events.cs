@@ -2,20 +2,20 @@ using System;
 using UnityEngine.Events;
 
 [Serializable]
-public class BalloonDestroyedEvent : UnityEvent<Balloon> { }
+public class BalloonDestroyedEvent : UnityEvent<Ball> { }
 
 [Serializable]
-public class BalloonClickedEvent : UnityEvent<Balloon> { }
+public class BalloonClickedEvent : UnityEvent<Ball> { }
 
 [Serializable]
-public class BalloonTouchBorderEvent : UnityEvent<Balloon> { }
+public class BalloonTouchBorderEvent : UnityEvent<Ball> { }
 
 
 [Serializable]
-public class BalloonBurstedEvent : UnityEvent<Balloon> { }
+public class BalloonBurstedEvent : UnityEvent<Ball> { }
 
 [Serializable]
-public class BalloonExplodedEvent : UnityEvent<Balloon> { }
+public class BalloonExplodedEvent : UnityEvent<Ball> { }
 
 
 [Serializable]

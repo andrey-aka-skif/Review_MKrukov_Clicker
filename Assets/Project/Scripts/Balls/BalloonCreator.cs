@@ -5,19 +5,19 @@ using UnityEngine;
 /// </summary>
 public class BalloonCreator : IBalloonCreator
 {
-    private readonly Balloon _prefab;
+    private readonly Ball _prefab;
     private readonly Transform _root;
 
-    public BalloonCreator(Balloon prefab, Transform root)
+    public BalloonCreator(Ball prefab, Transform root)
     {
         _prefab = prefab;
         _root = root;
     }
 
-    public Balloon Create(int number)
+    public Ball Create(int number)
     {
         var balloon = Object.Instantiate(_prefab, _root);
-        balloon.transform.name = $"{typeof(Balloon)} ({number})";
+        balloon.transform.name = $"{typeof(Ball)} ({number})";
         return balloon;
     }
 }
