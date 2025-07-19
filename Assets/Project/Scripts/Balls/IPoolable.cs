@@ -9,7 +9,7 @@ public interface IPoolable
     /// <param name="settings">
     /// Объект настроек, с которыми создается объект пула
     /// </param>
-    void Activate(BalloonSettings settings);
+    void Activate(BallSettings settings);
 
     /// <summary>
     /// Деактивировать объект

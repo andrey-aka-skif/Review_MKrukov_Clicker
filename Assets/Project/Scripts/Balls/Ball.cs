@@ -104,7 +104,7 @@ public class Ball : MonoBehaviour, IPointerDownHandler, IPoolable
         }
     }
 
-    public void Activate(BalloonSettings settings)
+    public void Activate(BallSettings settings)
     {
         gameObject.SetActive(true);
 

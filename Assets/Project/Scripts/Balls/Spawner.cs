@@ -125,9 +125,9 @@ public class Spawner : MonoBehaviour
         _spawned.Add(balloon);
     }
 
-    private BalloonSettings GetSettings()
+    private BallSettings GetSettings()
     {
-        return new BalloonSettings
+        return new BallSettings
         {
             Position = _spawnZone.GetRndPosition(),
             Scale = new Vector3(1, 1, 1),

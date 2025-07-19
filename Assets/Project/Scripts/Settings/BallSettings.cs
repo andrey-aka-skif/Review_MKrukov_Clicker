@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Настройки шара при активации
 /// </summary>
-public struct BalloonSettings
+public struct BallSettings
 {
     /// <summary>
     /// Позиция
