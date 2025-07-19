@@ -6,7 +6,7 @@ namespace Assets.Project.Scripts.GameManagement
     /// <summary>
     /// Состояние игры
     /// </summary>
-    public class GameState
+    public class GameState : IPausable
     {
         private bool _isPlaying = false;
         private bool _isDied = true;
