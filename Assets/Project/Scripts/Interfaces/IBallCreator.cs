@@ -1,7 +1,7 @@
 /// <summary>
 /// Создатель шара
 /// </summary>
-public interface IBalloonCreator
+public interface IBallCreator
 {
     /// <summary>
     /// Создать шар

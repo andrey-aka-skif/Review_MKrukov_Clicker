@@ -5,12 +5,12 @@ using System.Collections.Generic;
 /// </summary>
 public class BallPool
 {
-    private readonly IBalloonCreator _creator;
+    private readonly IBallCreator _creator;
     private readonly Queue<Ball> _pool;
 
     private int _counter;
 
-    public BallPool(IBalloonCreator creator, int capacity = 10)
+    public BallPool(IBallCreator creator, int capacity = 10)
     {
         _creator = creator;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Создатель шара
 /// </summary>
-public class BallCreator : IBalloonCreator
+public class BallCreator : IBallCreator
 {
     private readonly Ball _prefab;
     private readonly Transform _root;
